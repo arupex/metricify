@@ -5,20 +5,20 @@ Metrics Done Easy
 
 
 
-#Install
+# Install
 
         npm install metricify --save
 
 
-#Usage
+# Usage
 
-        function optionalCallbackOnAllMetersFinish(meterData){
-
+        function optionalCallbackOnAllMetersFinish(meterResult){
+            console.log(JSON.stringify(meterResult, null, 3));
         }
 
-        var metrics = require('metricify');
+        var Metrics = require('metricify');
 
-        var factory = metrics(optionalCallbackOnAllMetersFinish);
+        var factory = new Metrics(optionalCallbackOnAllMetersFinish);
 
         var myMeter = factory.meter('myMeter');
 
@@ -31,3 +31,12 @@ Metrics Done Easy
         //factory.getMeters(); returns meter min/max and data points
 
         //factory.calcMetrics(); //returns detailed stats using stats-lite
+        
+        
+# Promises
+
+    // creates a meter that starts at function call, and ends when promise is resolved
+    // lets you force the scope incase your function calls assuming some scope
+    factory.promiseMeter('my-meter-name', functionThatResultsInPromise, argumentsToFunctionCallAsArray, forceScope)
+    
+    
